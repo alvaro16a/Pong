@@ -28,11 +28,22 @@
     }
 })();
 
+(function(){
+    self.Bar = function(x,y,width,height,board){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+        this.board = board;
+        this.board.bars.push(this); //acedo al elemento bars de la clase board y le agrego esta clase como eleento
+        this.kind = "rectangle"; //que tipo de figura se debe dibuar
+    }
+})();
+
 window.addEventListener("load",main);
 
 function main(){
-    var board = new Board(800,400);
-    console.log(board);
+    var board = new Board(800,600);
     var canvas = document.getElementById('canvas');
     var board_view = new BoardView(canvas,board);
 
