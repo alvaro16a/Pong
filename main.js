@@ -60,27 +60,46 @@
         this.board = board;
         this.board.bars.push(this); //acedo al elemento bars de la clase board y le agrego esta clase como eleento
         this.kind = "rectangle"; //que tipo de figura se debe dibuar
+        this.speed = 10;
     }
 
     self.Bar.prototype = {
         down: function(){
-
+            this.y += this.speed;    
         },
         up: function(){
-
+            this.y -= this.speed;
+        },
+        toString: function(){
+            return "x:" + this.x + " y:" + this.y;
         }
 
     }
 })();
 
-window.addEventListener("load",main);
+var board = new Board(800,600);
+var bar_1 = new Bar(20,100,40,100,board);
+var bar_2 = new Bar(740,100,40,100,board);
+var canvas = document.getElementById('canvas');
+var board_view = new BoardView(canvas,board);
+
+document.addEventListener("keydown",function(ev){
+   
+    if(ev.key == "ArrowUp"){
+        bar_1.up();
+    }else if(ev.key == "ArrowDown"){
+        bar_1.down();
+    }
+
+    console.log(""+bar_1);
+
+    
+});
+
+self.addEventListener("load",main);
 
 function main(){
-    var board = new Board(800,600);
-    var bar_1 = new Bar(20,100,40,100,board);
-    var bar_2 = new Bar(740,100,40,100,board);
-    var canvas = document.getElementById('canvas');
-    var board_view = new BoardView(canvas,board);
+
 
     board_view.draw();
 }
